@@ -14,7 +14,7 @@ define_platform "darwin-osx" do |platform|
 		default sdk_version {ENV["MACOSX_SDK_VERSION"] || "10.7"}
 		default sdk_path {platform_path + "Developer/SDKs/MacOSX#{sdk_version}.sdk"}
 
-		default architectures ["-arch i386", "-arch x86_64"]
+		default architectures %W{-arch i386 -arch x86_64}
 
 		buildflags [
 			:architectures,
