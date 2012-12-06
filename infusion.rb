@@ -5,8 +5,10 @@
 
 required_version "0.2"
 
-define_platform "darwin-osx" do |platform|
-	platform.configure do
+define_package "darwin-osx" do |package|
+	package.provides :system do
+		default platform_name "darwin-osx"
+		
 		default xcode_path Pathname.new(`xcode-select --print-path`.chomp)
 		default platform_path {xcode_path + "Platforms/MacOSX.platform"}
 		default toolchain_path {xcode_path + "Toolchains/XcodeDefault.xctoolchain"}
@@ -37,6 +39,25 @@ define_platform "darwin-osx" do |platform|
 		default libtool {toolchain_path + "usr/bin/libtool"}
 	end
 	
-	platform.make_available! if RUBY_PLATFORM.include?("darwin")
+	package.provides 'C++11' do
+		cxxflags %W{-std=c++11 -stdlib=libc++ -Wno-c++11-narrowing}
+	end
+	
+	package.provides 'OpenGL' do
+		ldflags ["-framework", "OpenGLES"]
+	end
+	
+	package.provides 'OpenAL' do
+		ldflags ["-framework", "OpenAL"]
+	end
+	
+	package.provides 'Cocoa' do
+		ldflags [
+			"-framework", "Foundation",
+			"-framework", "Cocoa",
+			"-framework", "AppKit",
+			"-framework", "CoreVideo",
+			"-framework", "CoreServices"
+		]
+	end
 end
-
