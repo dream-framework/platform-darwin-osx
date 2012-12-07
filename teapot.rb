@@ -48,7 +48,7 @@ define_target "platform-darwin-osx" do |target|
 	end
 	
 	target.provides 'Library/OpenGL' do
-		ldflags ["-framework", "OpenGLES"]
+		ldflags ["-framework", "OpenGL"]
 	end
 	
 	target.provides 'Library/OpenAL' do
