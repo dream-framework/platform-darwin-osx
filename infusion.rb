@@ -3,10 +3,10 @@
 #  This file is part of the "Teapot" project, and is released under the MIT license.
 #
 
-required_version "0.2"
+required_version "0.5"
 
 define_package "darwin-osx" do |package|
-	package.provides :system do
+	package.provides "System/darwin-osx" do
 		default platform_name "darwin-osx"
 		
 		default xcode_path Pathname.new(`xcode-select --print-path`.chomp)
@@ -39,19 +39,21 @@ define_package "darwin-osx" do |package|
 		default libtool {toolchain_path + "usr/bin/libtool"}
 	end
 	
-	package.provides 'C++11' do
+	package.provides :system => "System/darwin-osx"
+	
+	package.provides 'Language/C++11' do
 		cxxflags %W{-std=c++11 -stdlib=libc++ -Wno-c++11-narrowing}
 	end
 	
-	package.provides 'OpenGL' do
+	package.provides 'Library/OpenGL' do
 		ldflags ["-framework", "OpenGLES"]
 	end
 	
-	package.provides 'OpenAL' do
+	package.provides 'Library/OpenAL' do
 		ldflags ["-framework", "OpenAL"]
 	end
 	
-	package.provides 'Cocoa' do
+	package.provides 'Aggregate/Cocoa' do
 		ldflags [
 			"-framework", "Foundation",
 			"-framework", "Cocoa",
