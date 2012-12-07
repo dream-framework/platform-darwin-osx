@@ -5,8 +5,8 @@
 
 required_version "0.5"
 
-define_package "darwin-osx" do |package|
-	package.provides "System/darwin-osx" do
+define_target "platform-darwin-osx" do |target|
+	target.provides "Platform/darwin-osx" do
 		default platform_name "darwin-osx"
 		
 		default xcode_path Pathname.new(`xcode-select --print-path`.chomp)
@@ -39,21 +39,21 @@ define_package "darwin-osx" do |package|
 		default libtool {toolchain_path + "usr/bin/libtool"}
 	end
 	
-	package.provides :system => "System/darwin-osx"
+	target.provides :platform => "Platform/darwin-osx"
 	
-	package.provides 'Language/C++11' do
+	target.provides 'Language/C++11' do
 		cxxflags %W{-std=c++11 -stdlib=libc++ -Wno-c++11-narrowing}
 	end
 	
-	package.provides 'Library/OpenGL' do
+	target.provides 'Library/OpenGL' do
 		ldflags ["-framework", "OpenGLES"]
 	end
 	
-	package.provides 'Library/OpenAL' do
+	target.provides 'Library/OpenAL' do
 		ldflags ["-framework", "OpenAL"]
 	end
 	
-	package.provides 'Aggregate/Cocoa' do
+	target.provides 'Aggregate/Cocoa' do
 		ldflags [
 			"-framework", "Foundation",
 			"-framework", "Cocoa",
