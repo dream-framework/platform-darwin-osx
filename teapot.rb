@@ -55,7 +55,7 @@ define_target "platform-darwin-osx" do |target|
 		ldflags ["-framework", "OpenAL"]
 	end
 	
-	target.provides 'Aggregate/Cocoa' do
+	target.provides 'Aggregate/Display' do
 		ldflags [
 			"-framework", "Foundation",
 			"-framework", "Cocoa",
