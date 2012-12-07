@@ -39,6 +39,8 @@ define_target "platform-darwin-osx" do |target|
 		default libtool {toolchain_path + "usr/bin/libtool"}
 	end
 	
+	target.depends :variant
+	
 	target.provides :platform => "Platform/darwin-osx"
 	
 	target.provides 'Language/C++11' do
