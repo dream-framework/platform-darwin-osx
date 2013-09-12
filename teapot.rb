@@ -62,14 +62,4 @@ define_target "platform-darwin-osx" do |target|
 	target.provides "Library/bz2" do
 		append linkflags "-lbz2"
 	end
-	
-	target.provides 'Aggregate/Display' do
-		ldflags [
-			"-framework", "Foundation",
-			"-framework", "Cocoa",
-			"-framework", "AppKit",
-			"-framework", "CoreVideo",
-			"-framework", "CoreServices"
-		]
-	end
 end
