@@ -37,6 +37,7 @@ define_target "platform-darwin-osx" do |target|
 		default ld {toolchain_path + "usr/bin/ld"}
 		default ar {toolchain_path + "usr/bin/ar"}
 		default libtool {toolchain_path + "usr/bin/libtool"}
+		default install {["/usr/bin/install", "-C"]}
 	end
 	
 	target.depends :variant
