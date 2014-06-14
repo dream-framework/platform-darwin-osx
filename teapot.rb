@@ -9,7 +9,7 @@ define_target "platform-darwin-osx" do |target|
 	target.provides "Platform/darwin-osx" do
 		default platform_name "darwin-osx"
 		
-		default xcode_path Pathname.new(`xcode-select --print-path`.chomp)
+		default xcode_path Path.new(`xcode-select --print-path`.chomp)
 		default platform_path {xcode_path + "Platforms/MacOSX.platform"}
 		default toolchain_path {xcode_path + "Toolchains/XcodeDefault.xctoolchain"}
 		
@@ -28,7 +28,7 @@ define_target "platform-darwin-osx" do |target|
 
 		cflags [:buildflags]
 		cxxflags [:buildflags]
-		ldflags [:buildflags, :linkflags]
+		ldflags [:linkflags]
 
 		configure []
 
