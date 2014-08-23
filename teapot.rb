@@ -6,6 +6,8 @@
 teapot_version "1.0.0"
 
 define_target "platform-darwin-osx" do |target|
+	target.priority = 10
+	
 	target.provides "Platform/darwin-osx" do
 		default platform_name "darwin-osx"
 		
