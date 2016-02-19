@@ -65,4 +65,8 @@ define_target "platform-darwin-osx" do |target|
 	target.provides "Library/bz2" do
 		append linkflags "-lbz2"
 	end
+	
+	target.provides "Library/dl" do
+		append linkflags "-ldl"
+	end
 end
