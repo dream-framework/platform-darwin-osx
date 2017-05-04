@@ -15,15 +15,14 @@ define_target "platform-darwin-osx" do |target|
 		default platform_path {xcode_path + "Platforms/MacOSX.platform"}
 		default toolchain_path {xcode_path + "Toolchains/XcodeDefault.xctoolchain"}
 		
-		default sdk_version {ENV["OSX_SDK_VERSION"] || "10.11"}
-		default sdk_path {platform_path + "Developer/SDKs/MacOSX#{sdk_version}.sdk"}
+		default sdk_path {platform_path + "Developer/SDKs/MacOSX.sdk"}
 
 		default architectures %W{-arch x86_64}
 
 		buildflags [
 			:architectures,
 			"-isysroot", :sdk_path,
-			->{"-mmacosx-version-min=#{sdk_version}"},
+			"-pipe"
 		]
 
 		linkflags []
