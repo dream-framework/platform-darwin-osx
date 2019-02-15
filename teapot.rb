@@ -3,7 +3,7 @@
 #  This file is part of the "Teapot" project, and is released under the MIT license.
 #
 
-teapot_version "1.0.0"
+teapot_version "3.0"
 
 define_target "platform-darwin-osx" do |target|
 	target.priority = 10
@@ -41,7 +41,8 @@ define_target "platform-darwin-osx" do |target|
 		default install {["/usr/bin/install", "-C"]}
 	end
 	
-	target.depends :variant
+	target.depends :variant, public: true
+	target.depends :compiler, public: true
 	
 	target.provides :platform => "Platform/darwin-osx"
 	
@@ -68,4 +69,30 @@ define_target "platform-darwin-osx" do |target|
 	target.provides "Library/dl" do
 		append linkflags "-ldl"
 	end
+end
+
+define_target "compiler-gcc" do |target|
+	target.priority = 5
+	
+	target.provides "Compiler/clang" do
+		default cc ENV.fetch('CC', "gcc")
+		default cxx ENV.fetch('CXX', "g++")
+	end
+	
+	target.provides :compiler => "Compiler/clang"
+end
+
+define_target "compiler-clang" do |target|
+	# The default compiler for linux unless an explicit one is specified:
+	target.priority = 10
+	
+	target.provides "Compiler/clang" do
+		default cc ENV.fetch('CC', "clang")
+		default cxx ENV.fetch('CXX', "clang++")
+		
+		append cxxflags "-stdlib=libc++"
+		append ldflags "-lc++"
+	end
+	
+	target.provides :compiler => "Compiler/clang"
 end
