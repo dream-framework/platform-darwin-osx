@@ -46,10 +46,6 @@ define_target "platform-darwin-osx" do |target|
 	
 	target.provides :platform => "Platform/darwin-osx"
 	
-	target.provides 'Language/C++11' do
-		cxxflags %W{-std=c++11 -stdlib=libc++ -Wno-c++11-narrowing}
-	end
-	
 	target.provides 'Library/OpenGL' do
 		ldflags ["-framework", "OpenGL"]
 	end
