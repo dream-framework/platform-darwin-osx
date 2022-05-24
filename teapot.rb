@@ -17,10 +17,10 @@ define_target "platform-darwin-osx" do |target|
 		
 		default sdk_path {platform_path + "Developer/SDKs/MacOSX.sdk"}
 
-		default architectures %W{-arch x86_64 -arch arm64}
+		# default architectures %W{-arch x86_64 -arch arm64}
 
 		buildflags [
-			:architectures,
+			# :architectures,
 			"-isysroot", :sdk_path,
 			"-pipe"
 		]
